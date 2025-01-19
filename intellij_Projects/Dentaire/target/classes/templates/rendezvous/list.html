@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+
+      layout:decorate="~{layout}">
+
+<head>
+    <title>Liste des Rendez-vous</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Liste des Rendez-vous</h1>
+        <a href="/rendezvous/new" class="btn btn-success mb-3">Ajouter un Rendez-vous</a>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                <tr>
+                    <th>Date</th>
+                    <th>Heure</th>
+                    <th>Description</th>
+                    <th>Patient</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="rendezVous : ${rendezVous}">
+                    <td th:text="${rendezVous.date}"></td>
+                    <td th:text="${rendezVous.heure}"></td>
+                    <td th:text="${rendezVous.description}"></td>
+                    <td th:text="${rendezVous.patient.nom + ' ' + rendezVous.patient.prenom}"></td>
+                    <td>
+                        <a th:href="@{'/rendezvous/edit/' + ${rendezVous.id}}" class="btn btn-sm btn-warning">Modifier</a>
+                        <a th:href="@{'/rendezvous/delete/' + ${rendezVous.id}}" class="btn btn-sm btn-danger">Supprimer</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

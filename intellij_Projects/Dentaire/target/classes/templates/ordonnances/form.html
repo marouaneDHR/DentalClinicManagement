@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <title>Formulaire Ordonnance</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .form-container {
+      margin-top: 50px;
+      padding: 30px;
+      background-color: #ffffff;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+<div layout:fragment="content" class="container mt-5">
+  <h1 class="text-center mb-4">Formulaire Ordonnance</h1>
+  <div class="card form-container mx-auto">
+    <div class="card-body">
+      <form th:action="@{/ordonnances}" th:object="${ordonnance}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <div class="mb-3">
+          <label for="patient" class="form-label">Patient :</label>
+          <select id="patient" th:field="*{patient}" class="form-select">
+            <option th:each="patient : ${patients}" th:value="${patient.id}" th:text="${patient}" />
+          </select>
+
+        </div>
+
+        <div class="mb-3">
+          <label for="medicaments" class="form-label">Médicaments :</label>
+          <textarea id="medicaments" th:field="*{medicaments}" class="form-control"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Enregistrer</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+

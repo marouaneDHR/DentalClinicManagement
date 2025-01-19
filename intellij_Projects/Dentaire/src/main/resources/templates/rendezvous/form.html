@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+
+      layout:decorate="~{layout}">
+
+<head>
+    <title>Formulaire Rendez-vous</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Formulaire Rendez-vous</h1>
+        <div class="card mx-auto" style="max-width: 600px;">
+            <div class="card-body">
+                <form th:action="@{/rendezvous}" th:object="${rendezVous}" method="post">
+                    <input type="hidden" th:field="*{id}" />
+                    <div class="mb-3">
+                        <label for="date" class="form-label">Date :</label>
+                        <input type="date" id="date" th:field="*{date}" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="heure" class="form-label">Heure :</label>
+                        <input type="time" id="heure" th:field="*{heure}" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description :</label>
+                        <input type="text" id="description" th:field="*{description}" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="patient" class="form-label">Patient :</label>
+                        <select id="patient" th:field="*{patient}" class="form-select">
+                            <option th:each="patient : ${patients}" th:value="${patient.id}" th:text="${patient.nom + ' ' + patient.prenom}"></option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Enregistrer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
